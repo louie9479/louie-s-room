@@ -3,13 +3,13 @@ body {
   background-color: #2E4053;
 }
 
-.Main_Switch_Status {
+.Main_Light_Status {
   margin-top: 40%;
   color: white;
   font-family: Verdana;
 }
 
-.Main_Switch_Btn {
+.Main_Light_Btn {
   font-size: 1.5em;
   font-family: Verdana;
   padding: 10px;

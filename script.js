@@ -9,16 +9,28 @@ var config = {
 };
 firebase.initializeApp(config);
 
-$(document).ready(function() {
+$(document).ready(function(){
   var database = firebase.database();
-  var Main_Switch_Status;
+  var Main_Light_Status;
 
-  databse.ref().on("value", function(snap) {
-    Main_Switch_Status = snap.val().Main_Switch_Status;
-    if(Main_Switch_Status == 1) {
-      $(".Main_Switch_Status").text("ON");
+  database.ref().on("value", function(snap){
+    Main_Light_Status = snap.val().Main_Light_Status;
+    if(Main_Light_Status == 1){
+      $(".Main_Light_Status").text("The light is on");
     } else {
-      $(".Main_Switch_Status").text("OFF");
+      $(".Main_Light_Status").text("The light is off");
     }
-  })
+  });
+
+  $(".Main_Light_Btn").click(function(){
+    var firebaseRef = firebase.database().ref().child("Main_Light_Status");
+
+    if(Main_Light_Status == 1){
+      firebaseRef.set(0);
+      Main_Light_Status = 0;
+    } else {
+      firebaseRef.set(1);
+      Main_Light_Status = 1;
+    }
+  });
 });
