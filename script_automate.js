@@ -25,9 +25,11 @@ $(document).ready(function(){
 
     if(Main_Light_Status == 1){
       firebaseRef.set(0);
+      console.log("turned off");
       Main_Light_Status = 0;
     } else {
       firebaseRef.set(1);
+      console.log("turned on");
       Main_Light_Status = 1;
     }
 
