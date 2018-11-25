@@ -9,18 +9,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-$(window).onload(function(){
-  var firebaseRef = firebase.database().ref().child("Main_Light_Status");
-
-  if(Main_Light_Status == 1){
-    firebaseRef.set(0);
-    Main_Light_Status = 0;
-  } else {
-    firebaseRef.set(1);
-    Main_Light_Status = 1;
-  }
-}
-
 $(document).ready(function(){
   var database = firebase.database();
   var Main_Light_Status;
@@ -32,6 +20,19 @@ $(document).ready(function(){
     } else {
       $(".Main_Light_Status").text("The light is off");
     }
+
+    var firebaseRef = firebase.database().ref().child("Main_Light_Status");
+
+    if(Main_Light_Status == 1){
+      firebaseRef.set(0);
+      Main_Light_Status = 0;
+    } else {
+      firebaseRef.set(1);
+      Main_Light_Status = 1;
+    }
+
+    sleep(3000);
+
   });
 
   $(".Main_Light_Btn").click(function(){
@@ -46,3 +47,12 @@ $(document).ready(function(){
     }
   });
 });
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
